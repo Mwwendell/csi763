@@ -1,0 +1,40 @@
+function hw3p1
+
+for j=1:1000
+    for i=1:1000
+        N=10;
+        y=randn(N,1);
+        meany=mean(y);
+        ymu2=(y-meany).^2;
+        su(i)=sqrt((1/(N-1))*sum(ymu2));
+        sb(i)=sqrt((1/N)*sum(ymu2));
+    end
+    sumean(j)=mean(su);
+    sbmean(j)=mean(sb);
+end
+
+Nu=length(sumean);
+Nb=length(sbmean);
+binsizeu=2*iqr(sumean)/(Nu^(1/3));
+nbinsu=(max(sumean)-min(sumean))/binsizeu;
+binsizeb=2*iqr(sbmean)/(Nb^(1/3));
+nbinsb=(max(sbmean)-min(sbmean))/binsizeb;
+
+figure(1)
+[xu,bu]=hist(sumean,nbinsu);
+plot(bu,xu)
+figure(2)
+[xb,bb]=hist(sbmean,nbinsb);
+plot(bb,xb)
+figure(3)
+plot(bb,xb,'r')
+hold on
+plot(bu,xu,'b')
+
+sigmau=std(su);
+zu=(mean(sumean)-mean(sbmean))/(sigmau/sqrt(Nu));
+pu=(1/sqrt(2*pi))*exp(-(zu^2)/2)
+
+sigmab=std(sb);
+zb=(mean(sbmean)-mean(sumean))/(sigmab/sqrt(Nb));
+pb=(1/sqrt(2*pi))*exp(-(zb^2)/2)
