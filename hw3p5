@@ -1,0 +1,14 @@
+function hw3p5
+
+muith=mean(ithacamin);
+mucan=mean(canmin);
+nith=length(ithacamin);
+ncan=length(canmin);
+sigmaith=std(ithacamin);
+sigmacan=std(canmin);
+
+zith=(muith-mucan)/(sigmaith/sqrt(nith));
+pith=(1/sqrt(2*pi))*exp(-(zith^2)/2)
+
+zcan=(mucan-muith)/(sigmacan/sqrt(ncan));
+pcan=(1/sqrt(2*pi))*exp(-(zcan^2)/2)
