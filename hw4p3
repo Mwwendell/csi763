@@ -1,0 +1,19 @@
+function hw4
+
+numheads=[0 1 2 3 4 5];
+observed=[59 316 596 633 320 76];
+expected=[62.5 312.5 625 625 312.5 62.5];
+counts=[observed' expected'];
+
+figure(1)
+bar(numheads,counts,'grouped')
+legend('Observed','Expected')
+title('Histogram of Coin Flips')
+xlabel('Bins: Number of Heads')
+ylabel('Number of Flips')
+
+delta=observed-expected;
+chi2inside=(delta.^2)./expected;
+chi2=sum(chi2inside)
+degfreedom=length(observed)-1
+p=chi2pdf(chi2,degfreedom)
