@@ -6,12 +6,6 @@ Tnonino=ninotemp(find(1-ninoyes));
 nyes=length(Tnino);
 nno=length(Tnonino);
 
-%IQRyes=
-%IQRno=
-
-%binsizeyes=2*IQRyes/(nyes^(1/3));
-%binsizeno=2*IQRno/(nno^(1/3));
-
 xbaryes=mean(Tnino);
 xbarno=mean(Tnonino);
 muoyes=xbarno;
@@ -22,3 +16,4 @@ syes=sqrt((1/(nyes-1))*sum(xyes2));
 sno=sqrt((1/(nno-1))*sum(xno2));
 tyes=(xbaryes-muoyes)/(syes/sqrt(nyes));
 tno=(xbarno-muono)/(sno/sqrt(nno));
+tbar=(xbaryes-xbarno)/sqrt(((syes^2)/(nyes*(nyes-1)))+((sno^2)/(nno*(nno-1))))
