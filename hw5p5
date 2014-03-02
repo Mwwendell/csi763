@@ -12,6 +12,9 @@ for i=3:1000
 end
 
 plot(zt)
+title('z(t)=eps(t)+a*z(t-1)+b*z(t-2)')
+xlabel('time')
+ylabel('z(t)')
 
 ztmin1=zt(2:999);
 ztmin2=zt(1:998);
