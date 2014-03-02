@@ -1,0 +1,11 @@
+function hw5p3
+
+x1=randn(1000,1);
+x2=3*randn(1000,1);
+
+figure(1)
+[hist1,bins1]=ecdf(x1);
+[hist2,bins2]=ecdf(x2);
+plot(bins1,hist1,'r')
+hold on
+plot(bins2,hist2,'b')
