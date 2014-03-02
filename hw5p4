@@ -5,7 +5,7 @@ t=t';
 yt=.1.*t;
 t=t-.1.*yt;
 yt=yt+.001*t.^2;
-plot(t,yt,'b.')
+plot(t,yt,'b.','MarkerSize',10)
 title('Scatter Plots')
 xlabel('time')
 ylabel('y(t)')
