@@ -1,0 +1,26 @@
+function hw5p5
+
+% z(t) = eps(t) + a*z(t-1) + b*z(t-2)
+a=0.9;
+b=0.1;
+zt=zeros(1000,1);
+epst=randn(1000,1);
+zt(1)=1.0;
+zt(2)=1.0;
+for i=3:1000
+    zt(i)=epst(i)+a*zt(i-1)+b*zt(i-2);
+end
+
+plot(zt)
+
+ztmin1=zt(2:999);
+ztmin2=zt(1:998);
+M=[ztmin1 ztmin2];
+zmineps=zt(3:1000)-epst(3:1000);
+ab=M\zmineps
+
+format long
+diffa=ab(1)-a;
+diffb=ab(2)-b;
+precratioa=diffa/eps
+precratiob=diffb/eps
