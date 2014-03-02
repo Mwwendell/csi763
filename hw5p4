@@ -1,0 +1,23 @@
+function hw5p4
+
+t=1:1:25;
+t=t';
+yt=.1.*t;
+t=t-.1.*yt;
+yt=yt+.001*t.^2;
+plot(t,yt,'b.')
+title('Scatter Plots')
+xlabel('time')
+ylabel('y(t)')
+
+% y=a+bt
+M=ones(length(t),2);
+M(:,2)=t;
+ab1=M\yt
+
+% t=a+by
+M=ones(length(yt),2);
+M(:,2)=yt;
+ab2=M\t
+1/ab2(2)
+diffb=ab1(2)-1/ab2(2)
