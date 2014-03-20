@@ -1,0 +1,22 @@
+function hw6p3
+
+load OMNI_OMNI2_merged_20130927-v1.mat;
+Dst=Dst_index;
+Esw=Plasma_bulk_speed.*(abs(Bz_GSM)-Bz_GSM)/2;
+Dlen=length(Dst);
+Elen=length(Esw);
+figure(1)
+plot(Dst)
+figure(2)
+plot(Esw)
+y=Dst(1:(Dlen-1));
+x=Dst(2:Dlen);
+z=Esw(1:(Dlen-1));
+deltat=1/24
+b=deltat;
+xbz=x-b.*z;
+temp=y+xbz;
+ya=y(find(isnan(temp)==0));
+xbza=xbz(find(isnan(temp)==0));
+a=ya\xbza;
+tau=deltat/(1-a)
