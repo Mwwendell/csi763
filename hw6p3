@@ -22,11 +22,15 @@ Dlen=length(Dst);
 Elen=length(Esw);
 figure(1)
 plot(Dst)
+xlabel('Hours')
+ylabel('Geomagnetic Index')
 figure(2)
 plot(Esw)
+xlabel('Hours')
+ylabel('rectified upstream solar wind electric field')
 y=Dst(1:(Dlen-1));
 x=Dst(2:Dlen);
-z=Esw(1:(Dlen-1));
+z=Esw(1:(Elen-1));
 deltat=1;
 b=deltat;
 xbz=x-b.*z;
