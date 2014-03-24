@@ -3,6 +3,21 @@ function hw6p3
 load OMNI_OMNI2_merged_20130927-v1.mat;
 Dst=Dst_index;
 Esw=Plasma_bulk_speed.*(abs(Bz_GSM)-Bz_GSM)/2;
+
+noD=find(isnan(Dst)==1);
+meanD=mean(Dst(isnan(Dst)==0));
+stdDst=std(Dst(isnan(Dst)==0));
+for i=1:length(noD)
+    Dst(noD(i))=meanD+stdDst*randn(1);
+end
+
+noE=find(isnan(Esw)==1);
+meanE=mean(Esw(isnan(Esw)==0));
+stdEsw=std(Esw(isnan(Esw)==0));
+for i=1:length(noE)
+    Esw(noE(i))=meanE+stdEsw*randn(1);
+end
+
 Dlen=length(Dst);
 Elen=length(Esw);
 figure(1)
@@ -12,11 +27,8 @@ plot(Esw)
 y=Dst(1:(Dlen-1));
 x=Dst(2:Dlen);
 z=Esw(1:(Dlen-1));
-deltat=1/24
+deltat=1;
 b=deltat;
 xbz=x-b.*z;
-temp=y+xbz;
-ya=y(find(isnan(temp)==0));
-xbza=xbz(find(isnan(temp)==0));
-a=ya\xbza;
+a=xbz\y;
 tau=deltat/(1-a)
