@@ -2,6 +2,8 @@ function hw3p2
 
 N=100;
 x=rand(N,1);
+% y=0:.01:1;
+% x=sin(2*pi*y);
 acf_builtin=xcorr(x,'coef');
 
 for lag=0:(N-1)
@@ -10,7 +12,7 @@ for lag=0:(N-1)
     xbarminus=mean(xminus);
     xbarplus=mean(xplus);
     acftop=sum((xminus-xbarminus).*(xplus-xbarplus));
-    acfbottom=sqrt(sum((xminus-xbarminus).^2).*sum((xplus-xbarplus).^2));
+    acfbottom=sqrt(sum((xplus-xbarminus).^2).*sum((xminus-xbarplus).^2));
     acf_notes(lag+1)=acftop./acfbottom;
 end
 
