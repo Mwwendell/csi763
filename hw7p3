@@ -1,0 +1,51 @@
+function hw7p3
+
+x=[0 1 0 -1];
+pgram=fft(x);
+a=length(pgram);
+xbar=zeros(1000,1);
+xbar=xbar+a/2+1;
+pmin=min(imag(pgram));
+pmax=max(imag(pgram));
+y=linspace(pmin,pmax,1000);
+x2=[x x];
+pgram2=fft(x2);
+a2=length(pgram2);
+xbar2=zeros(1000,1);
+xbar2=xbar2+a2/2+1;
+pmin2=min(imag(pgram2));
+pmax2=max(imag(pgram2));
+y2=linspace(pmin2,pmax2,1000);
+x3=[x x x];
+pgram3=fft(x3);
+a3=length(pgram3);
+xbar3=zeros(1000,1);
+xbar3=xbar3+a3/2+1;
+pmin3=min(imag(pgram3));
+pmax3=max(imag(pgram3));
+y3=linspace(pmin3,pmax3,1000);
+
+figure
+subplot(3,2,1)
+plot(x)
+xlim([1 12])
+title('Time Series')
+subplot(3,2,2)
+plot(imag(pgram))
+hold on
+plot(xbar,y,'k')
+title('Periodogram')
+subplot(3,2,3)
+plot(x2)
+xlim([1 12])
+subplot(3,2,4)
+plot(imag(pgram2))
+hold on
+plot(xbar2,y2,'k')
+subplot(3,2,5)
+plot(x3)
+xlim([1 12])
+subplot(3,2,6)
+plot(imag(pgram3))
+hold on
+plot(xbar3,y3,'k')
