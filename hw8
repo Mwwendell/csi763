@@ -1,0 +1,20 @@
+function hw8
+
+numtrials=1000/5;
+variances=zeros(numtrials,1);
+
+for n=5:5:1000
+    xx=randn(n,1);
+    fftx=fft(xx);
+    N=length(fftx);
+    a=(2/N)*real(fftx);
+    b=(2/N)*imag(fftx);
+    pgramx=(N/2)*(a.^2+b.^2);
+    variances(n/5)=var(pgramx);
+end
+
+ns=5:5:1000;
+figure
+plot(ns,variances,'b.','MarkerSize',8)
+xlabel('Number of Points in Time Series')
+ylabel('Variance of Periodogram')
