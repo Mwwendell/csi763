@@ -1,0 +1,50 @@
+function hw11p1
+
+x1=0:.01:1;
+mu1=.5;
+sigma1=.1;
+xprob1=normpdf(x1,mu1,sigma1);
+x2=0:.05:1;
+mu2=0.2;
+sigma2=.05;
+xprob2=normpdf(x2,mu2,sigma2);
+figure
+plot(x1,xprob1,'b')
+hold on
+plot(x2,xprob2,'r')
+xmu=(sigma2^2/(sigma1^2+sigma2^2))*mu1+(sigma1^2/(sigma1^2+sigma2^2))*mu2;
+sigmamu=sqrt(1/((1/(sigma1^2))+(1/(sigma2^2))));
+mudist=normpdf(x1,xmu,sigmamu);
+plot(x1,mudist,'g')
+legend('Measurement, Sensor 1','Measurement, Sensor 2','Likely meas. given both sensors')
+xlabel('x')
+ylabel('Probability')
+
+
+
+% with velocity
+muv(1)=xmu;
+mudist2=mudist;
+for t=2:10
+    v1sig=.01;
+    v1=.05+v1sig*randn(1);
+    muv(t)=muv(t-1)+v1; % time step = 1
+    sigv(t)=sqrt(sigmamu^2+v1sig^2);
+    mudist2=[mudist2;normpdf(x1,muv(t),sigv(t))];
+end
+
+figure
+plot(x1,mudist,'g')
+hold on
+plot(x1,mudist2(2,:),'r')
+plot(x1,mudist2(3,:),'b')
+plot(x1,mudist2(4,:),'k')
+plot(x1,mudist2(5,:),'c')
+plot(x1,mudist2(6,:),'m')
+plot(x1,mudist2(7,:),'y')
+plot(x1,mudist2(8,:),'b--')
+plot(x1,mudist2(9,:),'r--')
+plot(x1,mudist2(2,:),'r--')
+xlabel('x')
+ylabel('probability')
+title('movement of x over time')
