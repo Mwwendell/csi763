@@ -1,0 +1,160 @@
+function buildnew
+
+load projectsave.mat
+
+waterathsi=interp1(tinterph2o,h2ointerp,hsidates2);
+
+
+
+x1=h2oratio1(1,:)';
+x2=h2oratio1(2,:)';
+x3=h2oratio2(1,:)';
+x4=h2oratio2(2,:)';
+x5=h2oratio3(1,:)';
+x6=h2oratio3(2,:)';
+x7=h2oratio4(1,:)';
+x8=h2oratio4(2,:)';
+y=waterathsi;
+
+
+
+x1=x1(isnan(y)==0);
+x2=x2(isnan(y)==0);
+x3=x3(isnan(y)==0);
+x4=x4(isnan(y)==0);
+x5=x5(isnan(y)==0);
+x6=x6(isnan(y)==0);
+x7=x7(isnan(y)==0);
+x8=x8(isnan(y)==0);
+y=y(isnan(y)==0);
+
+x1=[x1 x1];
+x2=[x2 x2];
+x3=[x3 x3];
+x4=[x4 x4];
+x5=[x5 x5];
+x6=[x6 x6];
+x7=[x7 x7];
+x8=[x8 x8];
+
+x1(:,2)=1;
+x2(:,2)=1;
+x3(:,2)=1;
+x4(:,2)=1;
+x5(:,2)=1;
+x6(:,2)=1;
+x7(:,2)=1;
+x8(:,2)=1;
+
+mb1=x1\y;
+mb2=x2\y;
+mb3=x3\y;
+mb4=x4\y;
+mb5=x5\y;
+mb6=x6\y;
+mb7=x7\y;
+mb8=x8\y;
+
+x1=x1(:,1);
+x2=x2(:,1);
+x3=x3(:,1);
+x4=x4(:,1);
+x5=x5(:,1);
+x6=x6(:,1);
+x7=x7(:,1);
+x8=x8(:,1);
+y=[y y];
+y(:,2)=1;
+
+mb12=y\x1;
+mb22=y\x2;
+mb32=y\x3;
+mb42=y\x4;
+mb52=y\x5;
+mb62=y\x6;
+mb72=y\x7;
+mb82=y\x8;
+
+myx=x1(:,1);
+myy=mb1(1)*myx+mb1(2);
+plot(h2oratio1(1,:),waterathsi,'b.','MarkerSize',8)
+hold on
+plot(myx,myy,'g')
+myx2=y(:,1);
+myy2=mb12(1)*y(:,1)+mb12(2);
+plot(myy2,myx2,'r-')
+xlabel('H2O HSI Ratio')
+ylabel('H2O Amount')
+
+figure
+myx=x8(:,1);
+myy=mb8(1)*myx+mb8(2);
+plot(h2oratio4(2,:),waterathsi,'b.','MarkerSize',8)
+hold on
+plot(myx,myy,'g')
+myx2=y(:,1);
+myy2=mb82(1)*y(:,1)+mb82(2);
+plot(myy2,myx2,'r-')
+xlabel('H2O HSI Ratio')
+ylabel('H2O Amount')
+
+
+
+
+co2athsi=interp1(co2times,co2,hsidates2);
+x9=co2ratio1(1,:)';
+x10=co2ratio1(2,:)';
+x11=co2ratio2(1,:)';
+x12=co2ratio2(2,:)';
+y2=co2athsi;
+x9=x9(isnan(y2)==0);
+x10=x10(isnan(y2)==0);
+x11=x11(isnan(y2)==0);
+x12=x12(isnan(y2)==0);
+y2=y2(isnan(y2)==0);
+
+x9=[x9 x9];
+x10=[x10 x10];
+x11=[x11 x11];
+x12=[x12 x12];
+x9(:,2)=1;
+x10(:,2)=1;
+x11(:,2)=1;
+x12(:,2)=1;
+mb9=x9\y2;
+mb10=x10\y2;
+mb11=x11\y2;
+mb121=x12\y2;
+x9=x9(:,1);
+x10=x10(:,1);
+x11=x11(:,1);
+x12=x12(:,1);
+y2=[y2 y2];
+mb92=y2\x9;
+mb102=y2\x10;
+mb112=y2\x11;
+mb122=y2\x12;
+
+figure
+myx3=x12(:,1);
+myy3=mb121(1)*myx3+mb121(2);
+plot(co2ratio2(2,:),co2athsi,'b.','MarkerSize',8)
+hold on
+plot(myx3,myy3,'g')
+myx4=y2(:,1);
+myy4=mb122(1)*y2(:,1)+mb122(2);
+plot(myy4,myx4,'r-')
+xlabel('CO2 HSI Ratio')
+ylabel('CO2 Amount')
+
+figure
+myx3=x11(:,1);
+myy3=mb11(1)*myx3+mb11(2);
+plot(co2ratio2(1,:),co2athsi,'b.','MarkerSize',8)
+hold on
+plot(myx3,myy3,'g')
+myx4=y2(:,1);
+myy4=mb112(1)*y2(:,1)+mb112(2);
+plot(myy4,myx4,'r-')
+xlabel('CO2 HSI Ratio')
+ylabel('CO2 Amount')
