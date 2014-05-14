@@ -1,0 +1,12 @@
+function hsidateconvert
+
+for i=1:19
+    if hsidates(i,1)==2008
+        numdays=366;
+    elseif hsidates(i,1)==2012
+        numdays=366;
+    else
+        numdays=365;
+    end
+    hsidates2(i)=hsidates(i,1)+hsidates(i,2)/numdays;
+end
