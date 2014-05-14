@@ -1,0 +1,17 @@
+i=1;
+fid=fopen('bao201108_01C3_all.co2');
+        while 1
+            line = fgetl(fid); % Read a line.
+            if ~ischar(line), break, end % Reached end of file.
+            if (~isempty(regexp(line,'BAO 2'))) % Line matches BAO
+                M201108(i,:) = str2num(line(7:end-4)); % Strip off BAO and flag at  string at end
+                i = i+1;
+            end
+        end
+
+t = datenum(M201108(:,1:6));
+d = M201108(:,11);
+dnans=find(d<-99);
+d(dnans)=NaN;
+%plot(t,d)
+%xlabel('MATLAB datenum') 
