@@ -1,0 +1,50 @@
+for j=1:83
+    if datevec2(j,3)<10
+        daynum=['0' num2str(datevec2(j,3))];
+    else
+        daynum=[num2str(datevec2(j,3))];
+    end
+    if datevec2(j,2)<10
+        monthnum=['0' num2str(datevec2(j,2))];
+    else
+        monthnum=[num2str(datevec2(j,2))];
+    end
+    datesstr2{j}=[num2str(datevec2(j,1)) monthnum daynum];
+end
+
+h2o=zeros(1,16);
+%h2oline=[];
+d=[];
+waters=[];
+waterstd=[];
+for i=1:length(datesstr)
+    filename=['BLD_H2O_' datesstr2{i},extra{i} '.txt'];
+    fid=fopen(filename);
+    while 1
+        line = fgetl(fid); % Read a line.
+        if ~ischar(line), break, end % Reached end of file.
+        if (isempty(regexp(line(1),'[A-Za-z]'))) % Line does not have A-Z or a-z
+            if (isempty(regexp(line,'\*')))
+            % Keep all parts of line after day of month
+%            h2oline = [line(51:60),h2oline];   % Store the line and convert from string to decimal.
+                %h2oline = num2str([line(1:end)]);
+                %h2o=[h2o;datevec2(i,1) datevec2(i,2) datevec2(i,3) h2oline];
+                line=line(51:59);
+                txtformat='([0-9][0-9][.][0-9][0-9][e][+][0-9][0-9])';
+                h2oline=regexprep(line,txtformat,'$1');
+                d=[d;str2num(h2oline)];
+            end
+        end
+    end
+    d(d==-999)=NaN;
+    dreal=d(isnan(d)==0);
+    meand=mean(dreal);
+    stdd=std(dreal);
+    waters=[waters;meand];
+    waterstd=[waterstd;stdd];
+    d=[];
+    fclose(fid);
+end
+
+
+save project.mat
