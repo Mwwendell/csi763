@@ -1,0 +1,58 @@
+function watervaporpgram
+
+load projectsave.mat
+
+newwaterdate=waterdate(1);
+newwater=waters(1);
+
+i=2;
+j=2;
+while i<83
+    if waterdate(i)==waterdate(i-1)
+        newwater(j-1)=mean(waters((i-1):i));
+        j=j-1;
+    else
+        newwaterdate=[newwaterdate;waterdate(i)];
+        newwater=[newwater;waters(i)];
+    end
+    i=i+1;
+    j=j+1;
+end
+    
+
+tinterph2o=2007.3:.01:2012.14;
+h2ointerp=interp1(newwaterdate,newwater,tinterph2o);
+plot(waterdate,waters,'b')
+hold on
+plot(tinterph2o,h2ointerp,'r')
+xlabel('Time')
+ylabel('Water Mixing Ratio (ppmv)')
+legend('Original Data','Interpolated Data')
+
+h2offt=fft(h2ointerp(isnan(h2ointerp)==0));
+N=length(h2ointerp(isnan(h2ointerp)==0));
+a=(2/N)*real(h2offt);
+b=(2/N)*imag(h2offt);
+h2opgram=(N/2)*(a.^2+b.^2);
+
+deltat=.01;
+T=N*deltat;
+deltaf=1/T;
+f=deltaf:deltaf:(N/2)*deltaf;
+
+figure
+plot(f,h2opgram(1:(N/2)))
+xlabel('Frequency (years^-^1)')
+ylabel('Magnitude')
+title('Water Mixing Ratio Periodogram')
+
+figure
+plot(f,h2opgram(1:(N/2)))
+xlabel('Frequency (years^-^1)')
+ylabel('Magnitude')
+xlim([0 5])
+ylim([0 1e8])
+title('Zoomed Water Mixing Ratio Periodogram')
+
+save projectsave.mat
+
