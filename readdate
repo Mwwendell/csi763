@@ -1,0 +1,80 @@
+i = 1;
+
+linea = '';
+for yr = 2008:2013 % Loop through years
+    if yr == 2008
+       mo = 7;
+    else
+       mo = 1;
+    end
+    
+    for m = mo:12 % Loop through month
+        fname = sprintf('bao_o3_6m_hourlymean_%02d_%d.dat',m,yr);
+
+        fid = fopen(fname); % Open file
+        for k = 1:7 % Read first seven lines and ignore.
+            line = fgetl(fid);
+        end
+        while 1
+            line = fgetl(fid); % Read a line.
+            if ~ischar(line), break, end % Reached end of file.
+            if (isempty(regexp(line,'[A-Z]'))) % Line does not have A-Z or a-z
+                line(6:end-length(' 999.9 999.9'));
+                %break
+                % Keep all parts of line after day of month
+                linea = [line(6:end-length(' 999.9 999.9')),linea];   % Store the line and convert from string to decimal.
+                i = i+1;
+            end
+        end
+        fclose(fid);
+    end
+    
+end
+
+d = str2num(linea);
+h = [1:length(d)];
+d(d==999.9) = NaN;
+
+indices=find(isnan(d)==0);
+timenonans=h(indices);
+o3nonans=d(indices);
+o3i=interp1(timenonans,o3nonans,h);
+o3good=o3i(isnan(o3i)==0);
+hgood=h(isnan(o3i)==0);
+T=length(o3good);
+o3fft=fft(o3good);
+fftlength=length(o3fft)/2;
+a=(2/length(o3good))*real(o3fft);
+b=(2/length(o3good))*imag(o3fft);
+o3pgram=(length(o3good)/2)*(a.^2+b.^2);
+f=[1:(length(o3good)/2)]'/length(o3good);
+half=length(o3pgram)/2;
+
+
+figure
+subplot(1,2,1)
+plot(hgood,o3good);
+xlabel('Time')
+set(gca,'XTick',0:8760:T)
+set(gca,'XTickLabel',{'7/2008','7/2009','7/2010','7/2011','7/2012'})
+ylabel('Ozone')
+subplot(1,2,2)
+plot(f,o3pgram(1:half),'r')
+ylim([-1000 5e4])
+numyears=T/8760;
+hold on
+xx=[1/numyears 1/numyears];
+yy=[0 0];
+plot(xx,yy,'b*','MarkerSize',8)
+text(1/numyears,2.5e4,'* = 1 year');
+
+
+o3acf=xcorr(o3good,'coef');
+numlags=length(o3acf)/2;
+figure
+plot(o3acf(numlags:(2*numlags)))
+xlabel('Lags')
+ylabel('Ozone ACF')
+
+
+save project.mat
