@@ -1,0 +1,117 @@
+function projectplots
+
+load projectsave.mat
+
+% water mixing ratio vs h2o decay ratio @ ~900nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio1(1,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Leading Radiance Ratio @~900nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+% water mixing ratio vs h2o rise ratio @ ~900nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio1(2,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Following Radiance Ratio @~900nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+
+% water mixing ratio vs h2o decay ratio @ ~1100nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio2(1,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Leading Radiance Ratio @~1100nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+% water mixing ratio vs h2o rise ratio @ ~1100nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio2(2,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Following Radiance Ratio @~1100nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+
+% water mixing ratio vs h2o decay ratio @ ~1400nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio3(1,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Leading Radiance Ratio @~1400nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+% water mixing ratio vs h2o rise ratio @ ~1400nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio3(2,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Following Radiance Ratio @~1400nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+
+% water mixing ratio vs h2o decay ratio @ ~1900nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio4(1,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Leading Radiance Ratio @~1900nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+% water mixing ratio vs h2o rise ratio @ ~1900nm
+figure
+[AX,H1,H2] = plotyy(waterdate,waters,hsidates2,h2oratio4(2,:),'plot');
+set(get(AX(1),'Ylabel'),'String','Water Mixing Ratio (ppmv)') 
+set(get(AX(2),'Ylabel'),'String','Following Radiance Ratio @~1900nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+
+% co2 vs co2 decay ratio @ ~2000nm
+figure
+[AX,H1,H2] = plotyy(co2times,co2,hsidates2,co2ratio1(1,:),'plot');
+set(get(AX(1),'Ylabel'),'String','CO2') 
+set(get(AX(2),'Ylabel'),'String','Leading Radiance Ratio @~2000nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+% co2 vs co2 rise ratio @ ~2000nm
+figure
+[AX,H1,H2] = plotyy(co2times,co2,hsidates2,co2ratio1(2,:),'plot');
+set(get(AX(1),'Ylabel'),'String','CO2') 
+set(get(AX(2),'Ylabel'),'String','Following Radiance Ratio @~2000nm') 
+xlabel('Time') 
+title('Water')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+
+% co2 vs co2 decay ratio @ ~2100nm
+figure
+[AX,H1,H2] = plotyy(co2times,co2,hsidates2,co2ratio2(1,:),'plot');
+set(get(AX(1),'Ylabel'),'String','CO2') 
+set(get(AX(2),'Ylabel'),'String','Leading Radiance Ratio @~2100nm') 
+xlabel('Time') 
+title('CO2')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
+% co2 vs co2 rise ratio @ ~2100nm
+figure
+[AX,H1,H2] = plotyy(co2times,co2,hsidates2,co2ratio2(2,:),'plot');
+set(get(AX(1),'Ylabel'),'String','CO2') 
+set(get(AX(2),'Ylabel'),'String','Following Radiance Ratio @~2100nm') 
+xlabel('Time') 
+title('CO2')
+set(H1,'LineStyle','--')
+set(H2,'LineStyle','.')
