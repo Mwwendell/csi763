@@ -1,0 +1,41 @@
+function co2time
+
+load projectsave.mat
+times=Mco2(:,1:6);
+for i=1:680886
+    if mod(Mco2(i,1),4)==0
+        day=1;
+        days=366;
+    else
+        day=0;
+        days=365;
+    end
+    if Mco2(i,2)==1
+        day=Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==2
+        day=31+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==3
+        day=day+59+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==4
+        day=day+90+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==5
+        day=day+120+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==6
+        day=day+151+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==7
+        day=day+181+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==8
+        day=day+212+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==9
+        day=day+243+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==10
+        day=day+273+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==11
+        day=day+304+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    elseif Mco2(i,2)==12
+        day=day+334+Mco2(i,3)+Mco2(i,4)/24+Mco2(i,5)/(24*60)+Mco2(i,6)/(24*60*60);
+    end
+    co2times(i)=Mco2(i,1)+day/days;
+end
+
+save projectsave.mat
