@@ -1,0 +1,97 @@
+function waterdateconvert
+
+for i=1:82
+    if datevec(i,2)==1
+        day=datevec(i,3);
+    elseif datevec(i,2)==2
+        day=datevec(i,3)+31;
+    elseif datevec(i,2)==3
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29;
+        else
+            day=datevec(i,3)+31+28;
+        end
+    elseif datevec(i,2)==4
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31;
+        else
+            day=datevec(i,3)+31+28+31;
+        end
+    elseif datevec(i,2)==5
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30;
+        else
+            day=datevec(i,3)+31+28+31+30;
+        end
+    elseif datevec(i,2)==6
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31;
+        else
+            day=datevec(i,3)+31+28+31+30+31;
+        end
+    elseif datevec(i,2)==7
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31+30;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31+30;
+        else
+            day=datevec(i,3)+31+28+31+30+31+30;
+        end
+    elseif datevec(i,2)==8
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31+30+31;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31+30+31;
+        else
+            day=datevec(i,3)+31+28+31+30+31+30+31;
+        end
+    elseif datevec(i,2)==9
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31+30+31+31;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31+30+31+31;
+        else
+            day=datevec(i,3)+31+28+31+30+31+30+31+31;
+        end
+    elseif datevec(i,2)==10
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31+30+31+31+30;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31+30+31+31+30;
+        else
+            day=datevec(i,3)+31+28+31+30+31+30+31+31+30;
+        end
+    elseif datevec(i,2)==11
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31+30+31+31+30+31;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31+30+31+31+30+31;
+        else
+            day=datevec(i,3)+31+28+31+30+31+30+31+31+30+31;
+        end
+    elseif datevec(i,2)==12
+        if datevec(i,1)==2008
+            day=datevec(i,3)+31+29+31+30+31+30+31+31+30+31+30;
+        elseif datevec(i,1)==2012
+            day=datevec(i,3)+31+29+31+30+31+30+31+31+30+31+30;
+        else
+            day=datevec(i,3)+31+28+31+30+31+30+31+31+30+31+30;
+        end
+    end
+    if datevec(i,1)==2008
+        numdays=366;
+    elseif datevec(i,1)==2012
+        numdays=366;
+    else
+        numdays=365;
+    end
+    waterdate(i)=datevec(i,1)+day/numdays;
+end
